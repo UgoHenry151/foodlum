@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load humanize %}
+
+{% load mathfilters %}
+
+
+{% block title %}  {% endblock title %}
+
+
+{% block header %} {% include 'header.html' %} {% endblock header %}
+
+
+{% block content %}
+  <div class="container-fluid checkout" style="background-color: rgba(201, 201, 94, 0.496);height:8rem">
+    <h3 class="text-center">Checkout</h3>
+  </div>
+  
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-5 mb-5">
+        <div id="cart-container" class="mb-5">
+          <table width="100%">
+              <thead>
+                  <tr>
+                      <td>Remove</td>
+                      <td>Image</td>
+                      <td>Spice</td>
+                      <td>Prize</td>
+                      <td>Quantity</td>
+                      <td>Amount</td>
+                  </tr>
+              </thead>
+      
+              <tbody>
+                  
+                  {% if shopcart%}
+                    {% for item in shopcart %} 
+                    <tr>
+                        <td><a href="#"><i class="fas fa-trash-alt"></i></a></td>
+                        <td><img src="{{item.meal.image.url}}"></td>
+                        <td><h5>{{item.how_spicy}}</h5></td>
+                        <td>
+                          {% if item.meal.discount %}
+                              <span>{{item.meal.discount|floatformat:2|intcomma}}</span>
+                          {% else %}
+                              <span>{{item.meal.price|floatformat:2|intcomma}}</span>
+                          {% endif %} 
+                        </td>
+                        <td><input class="w-50 pl-1" value="{{item.quantity}}" type="number" min="{{item.meal.min_order}}" max="{{item.meal.max_order}}"></td>
+                        <td>
+                          {% if item.meal.discount %}
+                              <span>{{item.meal.discount|mul:item.quantity|floatformat:2|intcomma}}</span>
+                          {% else %}
+                              <span>{{item.meal.price|mul:item.quantity|floatformat:2|intcomma}}</span>
+                          {% endif %}  
+                        </td>
+                      </tr>
+                      {% endfor %}
+                  {% endif %}
+              </tbody>
+          </table>
+      </div>
+      
+        <div id="cart-bottom" class="container pb-5">
+          <div class="row">
+            <div class="total col-lg-6 col-md-6 col-12">
+              <div>
+                  <h5>Cart Total</h5>
+                <hr class="soch">
+                <div class="d-flex justify-content-between">
+                    <h6>Total</h6>
+                    <p>{{total}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-5 mb-5">
+        <div class="checkout-details">
+          <form action="{% url 'placeorder' %}" method="POST" class="mx-auto"> 
+          {% csrf_token %}
+              <div class="form-row">
+                  <div class="form-group mr-3">
+                    <label for="Text">First Name</label>
+                    <input type="text" name="first_name" class="form-control" id="Text" placeholder="First Name" value="{{profile.first_name}}">
+                  </div>
+                  <div class="form-group">
+                    <label for="Text">Last Name</label>
+                    <input type="text" name="last_name" class="form-control" id="Text" placeholder="Last Name" value="{{profile.last_name}}">
+                  </div>
+              </div>
+              <div class="form-row">
+                  <div class="form-group mr-3">
+                    <label for="email">Email Address</label>
+                    <input type="email" name="email" class="form-control" id="Text" placeholder="Email Address" value="{{profile.user.email}}">
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" name="phone" class="form-control" id="Text" placeholder="Phone Number" value="{{profile.phone}}">
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="Address">Address</label>
+                  <input type="text" name="address" class="form-control" placeholder="1234 Main St" value="{{profile.address}}">
+                  <input type="hidden" name="get_total" class="form-control" placeholder="1234 Main St" value="{{total}}">
+                  <input type="hidden" name="get_orderno" class="form-control" placeholder="1234 Main St" value="{{orderno}}">
+              </div>
+              <div class="form-group">
+                  <label for="State">State</label>
+                  <select name="state" id=""class="form-control" value = "{{profile.state}}">
+                      <option value="">Abia</option>
+                      <option value="">Adamawa</option>
+                      <option value="">Akwa Ibom</option>
+                      <option value="">Anambra</option>
+                      <option value="">Bauchi</option>
+                      <option value="">Bayelsa</option>
+                      <option value="">Benue</option>
+                      <option value="">Borno</option>
+                      <option value="">Cross River</option>
+                      <option value="">Delta</option>
+                      <option value="">Ebonyi</option>
+                      <option value="">Edo</option>
+                      <option value="">Ekiti</option>
+                      <option value="">Enugu</option>
+                      <option value="">Gombe</option>
+                      <option value="">Imo</option>
+                      <option value="">Jigawa</option>
+                      <option value="">Kaduna</option>
+                      <option value="">Kano</option>
+                      <option value="">Kastina</option>
+                      <option value="">Kebbi</option>
+                      <option value="">Kogi</option>
+                      <option value="">Kwara</option>
+                      <option value="">Lagos</option>
+                      <option value="">Nasarawa</option>
+                      <option value="">Niger</option>
+                      <option value="">Ogun</option>
+                      <option value="">Ondo</option>
+                      <option value="">Osun</option>
+                      <option value="">Oyo</option>
+                      <option value="">Plateau</option>
+                      <option value="">Rivers</option>
+                      <option value="">Sokoto</option>
+                      <option value="">Taraba</option>
+                      <option value="">Yobe</option>
+                      <option value="">Zamfara</option>
+                      <option value="">Federal Capital Territory</option>
+                  </select>
+              </div>
+              <button type="submit" class="btn btn-danger">Place order</button>
+          </form>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock content %} 
+
+
+
+{% block footer %} {% include 'footer.html' %} {% endblock footer %}

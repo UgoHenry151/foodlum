@@ -1,0 +1,78 @@
+{% load sample_tag %}
+{% load static %}
+
+<nav class="navbar1">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-4 w-25">
+      <ul class="list-inline">
+        {% if user.is_authenticated %}
+        <li class="list-inline-item" style="color: white;"><a class="img" href="{% url 'profile' %}"><img src=""></a></li> 
+        <li class="list-inline-item" style="color: white;"><a class="btn btn-danger" href="{% url 'profile' %}">Profile</a></li> 
+        <li class="list-inline-item" style="color: white;"><a class="btn btn-danger" href="{% url 'signout' %}">SignOut</a></li> 
+        <li class="list-inline-item" ><a class="btn btn-danger" style="color: white;" href="{% url 'cart' %}"><i class="fas fa-shopping-basket"></i>
+        
+        {% if cartcount > 0 %}
+          {{cartcount}}
+        {% else %}
+        0
+        {% endif %} 
+        </a></li> 
+        {% else %}
+        <li class="list-inline-item" style="color: white;"><a class="btn btn-danger" href="{% url 'signin' %}">Signin</a></li> 
+        <li class="list-inline-item" style="color: white;"><a class="btn btn-danger" href="{% url 'signup' %}">Signup</a></li> 
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <a class="navbar-brand" href="#"><img src="{% static '' %}img/pix10.jpg"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>  
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Varieties
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item text-warning" href="Variety"></a>
+            {% if vee %}
+              {% for food in vee %}
+                <a class="dropdown-item text-warning" href="{% url 'variety' food.id food.slug%}">{{food.name|title}}</a>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'meals' %}">All Meals</a> 
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% intralink 'index' 'locator' %}">Contact</a>  
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" method = "POST" action="{% url 'searched' %}"> 
+      {% csrf_token %}
+        <input class="form-control mr-sm-2" name="itemsearch" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+
+
+  
+  {% if messages %}
+    {% for item in messages %}
+    <div class="alert alert-warning" role="alert">
+      {{item}}
+    </div>
+    {% endfor %}
+  {% endif %}
+    

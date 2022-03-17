@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block title %}  | User Profile  {% endblock title %}
+    
+
+
+{% block header %} {% include 'header.html' %} {% endblock header %}
+
+
+    
+{% block content %}  
+
+<div class="container"> 
+    <div class="main">
+        <div class="row">
+            <form action="{% url 'profileupdate' %}" method="POST" enctype="multipart/form-data" class="w-100 mx-auto"> 
+            {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-danger">Update</button>
+            </form> 
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
+    
+
+
+{% block contact %} {% endblock contact %}
+    
+
+
+{% block footer %} {% include 'footer.html' %} {% endblock footer %}
+  

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+
+{% block title %} | Meals Available {% endblock title %}
+
+
+{% block header %} {% include 'header.html' %} {% endblock header %}
+
+
+{% block content %}
+<div class="ugo">
+    <div class="container-fluid mt-4 mb-4">
+        <h1 class="huge">{{single.name}}</h1>
+        <div class="row">
+           <!-- box 1  -->
+            {% if variety %}
+                {% for food in variety %}
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 w-25 mt-5 mb-3">
+                        <div class="card w-100">
+                            <img src="{{food.image.url}}" class="card-img-top w-100 mt-5 mb-3">
+                            <div class="card-body text-center mb-4">
+                                <h5 class="card-title mb-3 text-info font-weight-bolder">Meal:{{food.meal}}</h5>
+                                <p class="card-text mb-4 text-success">
+                                {% if food.discount %}
+                                    <del>{{food.price|floatformat:2|intcomma}}</del>
+                                    <span>{{food.discount|floatformat:2|intcomma}}</span>
+                                {% else %}
+                                    <span>{{food.price|floatformat:2|intcomma}}</span>
+                                {% endif %}  
+                                </p>
+                                <a href="{% url 'mealdetail' food.id food.slug %}" class="btn btn-secondary">View Details</a>  
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %} 
+            {% endif %}
+           <!-- box 1 done -->
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    
+
+
+{% block footer %} {% include 'footer.html' %} {% endblock footer %}
+    

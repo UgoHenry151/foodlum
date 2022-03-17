@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}   User Profile  {% endblock title %}
+    
+
+
+{% block header %} {% include 'header.html' %} {% endblock header %}
+
+
+
+{% block content %}  
+
+<div class="container">
+    <div class="main">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-center sidebar">
+                    <div class="card-body">
+                        <h3>DASHBOARD</h3>
+                        <img src="{{profile.image.url}}" class="rounded-circle" width="150">
+                        <div class="mt-3">
+                            <h3>{{profile.user.username}}</h3>
+                            <a href="">Home</a>
+                            <a href="{% url 'profileupdate'  %}">Edit Profile</a> 
+                            <a href="{% url 'passwordupdate' %}">Change Password</a> 
+                            <a href="">View Shopping Cart</a>
+                            <a href="{% url 'signout' %}">Signout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mt-1">
+                <div class="card mb-3 content">
+                    <h1 class="m-3 pt-3"><span>{{profile.user.username}}</span></h1>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Username</h5>
+                            </div>
+                            <div class="col-md-9 text-secondary">
+                                {{profile.user.username|title }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>First Name</h5>
+                            </div>
+                            <div class="col-md-9 text-secondary">
+                                {{profile.first_name|title}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Last Name</h5>
+                            </div>
+                            <div class="col-md-9 text-secondary">
+                                {{profile.last_name|title}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Email</h5>
+                            </div>
+                            <div class="col-md-9 text-secondary">
+                                {{profile.user.email}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Address</h5>
+                            </div>
+                            <div class="col-md-9 text-secondary">
+                                {{profile.address|title}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>State</h5>
+                            </div>
+                            <div class="col-md-9 text-secondary">
+                                {{profile.state|title}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+    
+
+
+{% block contact %} {% endblock contact %}
+    
+
+
+{% block footer %} {% include 'footer.html' %} {% endblock footer %}
+  

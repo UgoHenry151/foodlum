@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% load mathfilters %}
+
+{% block title %} | User Profile {% endblock title %}
+    
+
+
+{% block header %} {% include 'header.html' %} {% endblock header %}
+
+
+
+{% block content %}  
+
+<div id="move" class="container pt-5 mt-5">
+    <h2 class="font-weight-bold pt-5">Shopping Cart</h2>
+</div>
+
+<div id="cart-container" class="container my-5">
+    <table width="100%">
+        <thead>
+            <tr>
+                <td>Remove</td>
+                <td>Image</td>
+                <td>Spice</td>
+                <td>Prize</td>
+                <td>Quantity</td>
+                <td>Amount</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            
+            {% if shopcart%}
+              {% for item in shopcart %} 
+              <tr>
+                  <td>
+                    <form action="{% url 'remove_item' %}" method="POST"> 
+                    {% csrf_token %}
+                        <input type="hidden" name="deleteitem" value="{{item.id}}">
+                        <button type="submit" class="btn cartbn"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                    </td>
+                  <td><img src="{{item.meal.image.url}}"></td>
+                  <td><h5>{{item.how_spicy}}</h5></td>
+                  <td>
+                    {% if item.meal.discount %}
+                        <span>{{item.meal.discount|floatformat:2|intcomma}}</span>
+                    {% else %}
+                        <span>{{item.meal.price|floatformat:2|intcomma}}</span>
+                    {% endif %} 
+                  </td>
+                  <td><input class="w-50 pl-1" value="{{item.quantity}}" type="number" min="{{item.meal.min_order}}" max="{{item.meal.max_order}}"></td>
+                  <td>
+                    {% if item.meal.discount %}
+                        <span>{{item.meal.discount|mul:item.quantity|floatformat:2|intcomma}}</span>
+                    {% else %}
+                        <span>{{item.meal.price|mul:item.quantity|floatformat:2|intcomma}}</span>
+                    {% endif %}  
+                  </td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<div id="cart-bottom" class="container pb-5">
+    <div class="row">
+        <div class="total col-lg-6 col-md-6 col-12">
+            <div>
+                <h5>Cart Total</h5>
+                <div class="d-flex justify-content-between">
+                    <h6>Subtotal</h6>
+                    <p>{{subtotal}}</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <h6>VAT (7.5%)</h6>
+                    <p>{{vat}}</p>
+                </div>
+                <hr class="soch">
+                <div class="d-flex justify-content-between">
+                    <h6>Total</h6>
+                    <p>{{total}}</p>
+                </div>
+                <a href="{% url 'checkout' %}" class="btn btn-danger mb-3 ml-3">Proceed To Checkout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+    
+
+
+{% block contact %} {% endblock contact %}
+    
+
+
+{% block footer %} {% include 'footer.html' %} {% endblock footer %}
+  
