@@ -344,7 +344,7 @@ def placeorder(request):
         curl = 'https://api.paystack.co/transaction/initialize'
         cburl = 'http://44.203.38.186/paidorder'
         # cburl = 'http://localhost:1900/paidorder'
-        cburl = 'http://127.0.0.1/paidorder'
+        # cburl = 'http://127.0.0.1/paidorder'
         ref_num = str(uuid.uuid4())
         total = float(request.POST['get_total']) * 100
         # order_num = request.POST['get_orderno']
