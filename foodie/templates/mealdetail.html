@@ -32,19 +32,21 @@
                         <p class='card-text mb-4 text-success'>{{mealdetail.menu}}</p>
                         <p class='card-text mb-4 text-success'>{{mealdetail.time}}</p>
                     </div>
-                    <form action="{% url 'addtocart' %}", method="POST"  class=""> 
+                    <div class="job">
+                        <form action="{% url 'addtocart' %}", method="POST"> 
                         {% csrf_token %} 
                             <div class="form-group">
-                              <label for="exampleInputText1">Quantity</label>
-                              <input style="width: 100px;" type="number" name="quantity" value="1" min="{{mealdetail.min_order}}" max="{{mealdetail.max_order}}" class="form-control" id="exampleInputText1" aria-describedby="textHelp">
-                              <input type="hidden" name="mealdetailid" value="{{mealdetail.id}}">
+                                <label for="exampleInputText1" class="text-center">Quantity</label>
+                                <input style="width: 100px;" type="number" name="quantity" value="1" min="{{mealdetail.min_order}}" max="{{mealdetail.max_order}}" class="form-control" id="exampleInputText1" aria-describedby="textHelp">
+                                <input type="hidden" name="mealdetailid" value="{{mealdetail.id}}">
                             </div>
                             <div class="more">
                                 <h6>Kindly confirm to us how spicy you want EACH meal to be</h6>
-                                <input type="text" name="how_spicy" id="exampleInputText1" aria-describedby="textHelp">
+                                <input type="text" name="how_spicy" id="exampleInputText1" aria-describedby="textHelp" class="text-center">
                             </div>
-                            <button type="submit" class="btn mybtn">Add To Cart</button>
+                            <button type="submit" class="btn mybtn mx-auto bg-danger mt-4 mb-3 addcartbtn" style="border-radius: 7px">Add To Cart</button>
                         </form>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 w-25"><img src="{% static '' %}img/advert2.jpg" style="width: 100%; height: 100%;"></div>
