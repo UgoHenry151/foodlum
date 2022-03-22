@@ -1,47 +1,41 @@
 {% load static %}
 
-<div class="location" id="locator">
+<div class="location">
     <h1 class="huge">Contact Us:</h1>
     <div class="container">
-        <div class="row">
-            <div class="not col-lg-6">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.7807859106438!2d3.37530931482239!3d6.549338924679319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8d9e416c6b1d%3A0xa59d567437a2c0dc!2sBukka%20Hut!5e0!3m2!1sen!2sng!4v1644411828090!5m2!1sen!2sng" width="600" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <div class="row locat mb-5">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 not">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.7807859106438!2d3.
+                37530931482239!3d6.549338924679319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.
+                1!3m3!1m2!1s0x103b8d9e416c6b1d%3A0xa59d567437a2c0dc!2sBukka%20Hut!5e0!3m2!1sen!2sng!
+                4v1644411828090!5m2!1sen!2sng" class="w-100"  style="border:0; height: 50vh;" allowfullscreen="" loading="lazy"></iframe>
             </div>
-            <div class="col-lg-6">
-                <div class="nebo">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="w-100 nebo">
                     <form action="{% url 'contact' %}" method="POST">
                     {% csrf_token %} 
                         <h1 class="nel">Let's Talk</h1>
-                        <!-- input tag for first name  -->
                         <div class="tia">
                             <div>
                                 <input type="text" id="exampleInputText1" name="name" placeholder="Fullname">
                             </div>
-                            <!-- input tag for first name done -->
                         </div>
-                        <!-- input tag for lastname done -->
-                        <!-- input tag for Email  -->
                         <div class="tam">
                             <div>
                                 <input type="email" id="exampleInputEmail" name="email" placeholder="Email">
                             </div>
-                            <!-- input tag for Email done -->
-                            <!-- input tag for username  -->
                             <div>
                                 <input type="text" id="exampleInputText1" name="phone" placeholder="Phone Number">
                             </div>
-                            <!-- input tag for username done  -->
-                            <!-- input tag for password  -->
                         </div>
                         <div class="yuu">
                             <div>
                                 <input type="exampleInputText1" name="subject" placeholder="subject">
-                                <textarea cols="64" rows="4" name="message" placeholder="Message"></textarea>
+                                <textarea cols="40" rows="4" name="message" placeholder="Message"></textarea>
                             </div>
                         </div>
-                        <!-- input tag for confirm password done -->
                         <div class="hen">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-danger mb-5">Submit</button>
                         </div>
                     </form>
                 </div>
